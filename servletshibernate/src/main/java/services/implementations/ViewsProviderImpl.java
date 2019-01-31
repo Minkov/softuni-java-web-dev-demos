@@ -18,7 +18,7 @@ public class ViewsProviderImpl implements ViewsProvider {
 
         URL url = this.getClass().getClassLoader().getResource(viewPath);
 
-        File file = null;
+        File file;
         try {
             file = new File(url.toURI());
         } catch (URISyntaxException e) {

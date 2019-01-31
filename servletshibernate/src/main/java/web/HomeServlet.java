@@ -1,8 +1,5 @@
 package web;
 
-import services.ViewsProvider;
-
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,17 +9,10 @@ import java.io.IOException;
 
 @WebServlet("/")
 public class HomeServlet extends HttpServlet {
-    private final ViewsProvider viewsProvider;
-
-    @Inject
-    public HomeServlet(ViewsProvider viewsProvider) {
-        this.viewsProvider = viewsProvider;
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String html = viewsProvider.view("home/get");
-        resp.getWriter()
-                .write(html);
+        req.setAttribute("title", "Home page");
+        req.getRequestDispatcher("/home.jsp")
+                .forward(req, resp);
     }
 }
