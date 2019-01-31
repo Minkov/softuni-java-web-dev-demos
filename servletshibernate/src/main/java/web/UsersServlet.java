@@ -1,7 +1,6 @@
 package web;
 
 import entities.User;
-import services.JsonParser;
 import services.UsersService;
 
 import javax.inject.Inject;
@@ -11,27 +10,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/users")
 public class UsersServlet extends HttpServlet {
     private final UsersService usersService;
-    private final JsonParser jsonParser;
 
     @Inject
-    public UsersServlet(UsersService usersService, JsonParser jsonParser) {
+    public UsersServlet(UsersService usersService) {
         this.usersService = usersService;
-        this.jsonParser = jsonParser;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> users = usersService.getAllUsers();
-        String usersJson = jsonParser.toJson(users);
+        req.getRequestDispatcher("register.jsp")
+                .forward(req, resp);
+    }
 
-        resp.setHeader("Content-Type", "application/json");
-
-        resp.getWriter()
-                .write(usersJson);
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter("username");
+        User user = new User();
+        user.setName(username);
+        usersService.add(user);
+        resp.sendRedirect("/");
     }
 }
