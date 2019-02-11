@@ -10,15 +10,19 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>It works on <p><%= request.getAttribute("currentDate") %></p></h1>
+<h1>It works on <p><%= request.getAttribute("currentDate") %>
+</p></h1>
 
 <% viewmodels.HomeViewModel viewModel = (HomeViewModel) request.getAttribute(ViewConstants.VIEW_MODEL_ATTRIBUTE_NAME); %>
 
-<h2>Hello <%= viewModel.getName() %> </h2>
-<h2>Hello <%= viewModel.getAge() %> </h2>
+<h2>Hello <%= viewModel.getName() %>
+</h2>
+<h2>Hello <%= viewModel.getAge() %>
+</h2>
 
-<% for(int i = 0; i < 5; i ++) { %>
-    <li><%= i %></li>
+<% for (int i = 0; i < 5; i++) { %>
+<li><%= i %>
+</li>
 <% } %>
 
 
@@ -35,8 +39,12 @@
         url: '/api/users',
         method: 'GET',
         success: (users) => {
-            const list = generateList(users);
-            $('body').append(list);
+
+            setTimeout(() => {
+                const list = generateList(users);
+                $('body').append(list);
+            }, 5000);
+            alert("qweqwe");
         },
     });
 </script>

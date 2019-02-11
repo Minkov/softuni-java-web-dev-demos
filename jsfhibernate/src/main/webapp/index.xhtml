@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui = "http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>JSF Demo</title>
+</h:head>
+<h:body>
+    <h1>#{helloWorldBean.message}</h1>
+
+    <ul class="users-list">
+        <!--<f:forEach var="user" items="#{users.users}">-->
+            <!--<li class="users-list-item">-->
+                <!--<h:outputText value="#{user.name}"/>-->
+            <!--</li>-->
+        <!--</f:forEach>-->
+    </ul>
+    <a href="/next.xhtml">Next</a>
+    <h:form>
+        <label>
+            <h:outputText value="Username" />
+            <h:inputText value="#{signUpBean.username}" styleClass="tb-username">
+                <f:validateLength minimum="4" maximum="6"/>
+            </h:inputText>
+            <!--<h:outputFormat value=""-->
+
+            <h:outputFormat value="#{signUpBean.messageFormat}" >
+                <f:param value="Item 1" />
+            </h:outputFormat>
+
+            <h:selectBooleanCheckbox value="true" />
+            <h:selectOneMenu>
+                <!--<f:-->
+            </h:selectOneMenu>
+        </label>
+        <h:commandButton value="Sign up" action="#{signUpBean.signUp2}"/>
+    </h:form>
+
+    <h:outputText value="$100.009">
+        <f:convertNumber currencySymbol="$" type="currency" />
+    </h:outputText>
+    <br />
+    <h:outputText value="100.12345" >
+        <f:convertNumber pattern="#000.000" />
+    </h:outputText>
+    <br />
+
+    <h:outputText value="100.12345" >
+        <f:convertNumber pattern="#0.000" />
+    </h:outputText>
+    <br />
+
+    <h:outputText value="100.123" >
+        <f:convertNumber minFractionDigits="3" />
+    </h:outputText>
+    <br />
+
+    <h:outputText value="100.123" >
+        <f:convertNumber minFractionDigits="4" />
+    </h:outputText>
+    <br />
+
+    <h:outputText value="100.123" >
+        <f:convertNumber minFractionDigits="2" />
+    </h:outputText>
+    <br />
+
+    <h:outputText value="100.1234" >
+        <f:convertNumber pattern="#0.00" />
+    </h:outputText>
+    <br/>
+    <h:outputText value="100.1" >
+        <f:convertNumber pattern="#0.00" />
+    </h:outputText>
+    <br/>
+
+    <h:outputText value="100.11" >
+        <f:convertNumber pattern="#0.00" />
+    </h:outputText>
+    <br />
+
+    <h:outputText value="100.1" >
+        <f:convertNumber pattern="#00000.000" />
+    </h:outputText>
+
+    <br/>
+    <h:outputText value="#{dates.currentDate}">
+    </h:outputText>
+    <br/>
+    <h:outputText value="#{dates.currentDate}">
+        <f:convertDateTime type="date" />
+    </h:outputText>
+    <br/>
+    <h:outputText value="#{dates.currentDate}">
+        <f:convertDateTime type="time" />
+    </h:outputText>
+
+    <br/>
+    <h:outputText value="#{dates.currentDate}">
+        <f:convertDateTime type="both" />
+    </h:outputText>
+
+    <br/>
+    <h:outputText value="#{dates.currentDate}">
+        <f:convertDateTime dateStyle="short"/>
+    </h:outputText>
+
+    <br/>
+    <h:outputText value="#{dates.currentDate}">
+        <f:convertDateTime dateStyle="full"/>
+    </h:outputText>
+
+
+    <br/>
+    <h:outputText value="#{dates.currentDate}">
+        <f:convertDateTime pattern="EEE dd-MMM-YYYY"/>
+    </h:outputText>
+
+    <h:outputScript>
+        document.getElementsByClassName("tb-username")[0]
+                .addEventListener("input", (ev) => {
+                    const tbUsername = ev.target;
+                    const hasCapitalLetters = [...tbUsername.value]
+                            .some(ch => ch.toUpperCase() === ch);
+                    if(hasCapitalLetters) {
+                        // add tick near the input
+                    }
+                });
+    </h:outputScript>
+</h:body>
+</html>
